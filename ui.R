@@ -27,14 +27,14 @@ intro_tab <- tabPanel(
 )
 
 # Create sidebar panel for widget
-sidebar_panel_widget <- sidebarPanel(
+sidebar_panel_widget_tab1 <- sidebarPanel(
   checkboxGroupInput(
     inputId = "selection",
     label = "Selection",
     choices = c("selection1", "selection2", "selection2"),
     # True allows you to select multiple choices...
     #multiple = TRUE,
-    selected = "United States"
+    selected = "selection1"
   ),
   
   sliderInput(inputId = "slider2",
@@ -44,26 +44,44 @@ sidebar_panel_widget <- sidebarPanel(
               value = c(1, 10))
 )
 
-# Put a plot in the middle of the page
+sidebar_panel_widget_tab2 <- sidebarPanel(
+  radioButtons("gender_selection", label = h3("Selection"),
+               choices = list("Men" = 1, "Women" = 2, "All" = 3), 
+               selected = 1),
+  sliderInput("top_occupation_selection", label = h3("Number of Top Occupation"), min = 1, 
+              max = nrow(occupation_raw), value = 10)
+)
+
 main_panel_plot <- mainPanel(
   # Make plot interactive
   #plotlyOutput(outputId = "climate_plot")
 )
 
+main_panel_plot_2 <- mainPanel(
+  # Make plot interactive
+  plotOutput(outputId = "top_occupation_bar_chart")
+)
+
 tab1 <- tabPanel(
   "Chart 1",
   sidebarLayout(
-    sidebar_panel_widget,
+    sidebar_panel_widget_tab1,
     main_panel_plot
   )
 )
 
 tab2 <- tabPanel(
-  "Chart 2"
+  "Top Occupations",
+  sidebar_panel_widget_tab2,
+  main_panel_plot_2
 )
 
 tab3 <- tabPanel(
   "Chart 3"
+)
+
+conclusion_tab <- tabPanel(
+  "Conclusion"
 )
 
 ui <- navbarPage(
@@ -74,5 +92,6 @@ ui <- navbarPage(
   intro_tab,
   tab1,
   tab2,
-  tab3
+  tab3,
+  conclusion_tab,
 )
