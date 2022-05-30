@@ -1,7 +1,6 @@
 library(ggplot2)
 library(plotly)
 library(dplyr)
-
 source("summary.R")
 
 income_df <- read.csv("inc_occ_gender.csv", stringsAsFactors = FALSE)
@@ -65,4 +64,18 @@ server <- function(input, output) {
   })
   
   #tab 3
+
+# conclusion
+  output$occupations <- renderTable({
+    occupations <- income_df %>%
+      filter(Occupation %in%
+               c("MANAGEMENT", "BUSINESS", "COMPUTATIONAL", "ENGINEERING",
+                 "SCIENCE", "LEGAL", "EDUCATION", "ART", "HEALTHCARE PROFESSIONAL",
+                 "HEALTHCARE SUPPORT", "PROTECTIVE SERVICE", "CULINARY",
+                 "GROUNDSKEEPING", "SERVICE", "SALES", "OFFICE", "AGRICULTURAL",
+                 "CONSTRUCTION", "MAINTENANCE", "PRODUCTION", "TRANSPORTATION",
+                 "SOCIAL SERVICE"))
+  })
+  return(occupations)
 }
+    

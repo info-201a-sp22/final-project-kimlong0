@@ -16,15 +16,15 @@ income_df <- read.csv("inc_occ_gender.csv", stringsAsFactors = FALSE)
 #   # Add custom styling from a scss file
 #   bs_add_rules(sass::sass_file("my_style.scss"))
 
-# Home page tab
+
+# introduction page
 intro_tab <- tabPanel(
-  # Title of tab
   "Introduction",
   fluidPage(
-    h1("Introduction"),
-    p("Cow goes MOOOOOOOOOOOOOO")
+    includeMarkdown("intro.md")
   )
 )
+
 
 # Create sidebar panel for widget
 sidebar_panel_widget_tab1 <- sidebarPanel(
@@ -62,6 +62,7 @@ main_panel_plot_2 <- mainPanel(
   plotOutput(outputId = "top_occupation_bar_chart")
 )
 
+# page 1 
 tab1 <- tabPanel(
   "Chart 1",
   sidebarLayout(
@@ -70,19 +71,29 @@ tab1 <- tabPanel(
   )
 )
 
+
+# page 2 
 tab2 <- tabPanel(
   "Top Occupations",
   sidebar_panel_widget_tab2,
   main_panel_plot_2
 )
-
+# page 3
 tab3 <- tabPanel(
   "Chart 3"
 )
 
+# Conclusion page
 conclusion_tab <- tabPanel(
-  "Conclusion"
+  "Conclusion",
+  fluidPage(
+    includeMarkdown("conclusion.md"),
+    mainPanel(
+      tableOutput("occupations")
+    )
+  )
 )
+
 
 ui <- navbarPage(
   # Select Theme
