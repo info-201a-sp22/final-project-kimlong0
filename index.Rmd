@@ -1,0 +1,107 @@
+---
+title: "Exploratory Analysis"
+output: html_document
+---
+
+## The Analysis of the Relationship Between Occupation and Gender Pay
+
+### Authors
+
+Matthew Chung (mchung25@uw.edu)
+
+Trang Ha (htrang07@uw.edu)
+
+Christina Chen (clychen@uw.edu)
+
+Kimlong Nguyen (kimlong0@uw.edu)
+
+### Date
+
+Spring 2022
+
+### Abstract
+
+Our main question is whether there is a gender wage gap and this is important because of the history of women discrimination in the workforce. To address the question, we will investigate the dataset from the U.S Bureau of Labor Statistics.
+
+### Keywords
+
+Gender, Occupation, Income
+
+### Introduction  
+
+This project focuses on data provided by the U.S. Bureau of Labor Statistics which provides occupations by employment and incomes between two genders, males and females. Our main question is whether a wage gap exists? We plan to further explore this question by asking three questions. The first question is, “What is the proportion of jobs that men are being paid more than women?” The second question is “Are there specific types of occupations where there is a gender wage gap?” The final topic we plan to look at is whether there is an imbalance in employment between both genders by asking, “Which occupation has the highest imbalance in gender ratio?”
+
+These questions are motivated by the continuing discriminations against women in the workforce. Whether or not there is a gender wage gap, a disparity within wages among equal employees is unfair and should be addressed. We wish to analyze the disparities within the data given about gender and employment throughout a variety of job fields. This is important to show that there needs to be progress made within the workforce.
+
+Hopefully, by looking at the results of the data, we can have a better grasp on the issue of gender inequality within the workforce.
+
+### Related Work  
+
+The main topics we will be exploring are occupation incomes, gender pay gap, and gender employment gap. According to Investopedia1, data show that healthcare jobs are listed as the highest paying occupations. Employment in healthcare is projected to increase by approximately 15% from 2020 to 2030. Our aim is to investigate the dataset from the Bureau of Labor Statistics to examine the incomes of numerous occupations to compare the incomes and identify the highest paying occupations. Alongside investigating the incomes, we will analyze the incomes by gender and the gender employment data. Multiple articles claim that the gender employment gap in the workforce is slowly closing. What gender gap means is the difference between genders that are reflected in social, political, intellectual, cultural, or economic attainments or attitudes. The Business News Daily2 wrote that over the past few years, America has improved in increasing women representation in the workforce. However, there is still more progress to be made. Women are still underrepresented at every level, which is not due to lack of education or attrition rates. Data show that women earned 83 cents to every dollar earned by men. The United States Census Bureau3 claimed that gender-based wage gap has narrowed over the past few years, but the disparities remain. Overall, these topics are important to investigate because of the ongoing high relevancy in our current time.
+
+References:
+
+Hong, E. (2022, April 26). 25 highest paid occupations in the U.S. Investopedia. Retrieved April 27, 2022, from https://www.investopedia.com/personal-finance/top-highest-paying-jobs/
+
+Schooley, S. (2022, January 14). The workplace gender gap and how we can close it. Business News Daily. Retrieved April 27, 2022, from https://www.businessnewsdaily.com/4178-gender-gap-workplace.html
+
+WISNIEWSKI, M. E. G. A. N. (2022, March 1). In Puerto Rico, no gap in median earnings between men and women. Census.gov. Retrieved April 27, 2022, from https://www.census.gov/library/stories/2022/03/what-is-the-gender-wage-gap-in-your-state.html
+
+### The Dataset
+
+For this project, the data set that we will be using to explore these questions is called “U.S. Incomes by Occupation and Gender” and can be found on Kaggle. The Bureau of Labor Statistics collected the data using methods like the Current Population Survey, which is a survey carried out monthly by the Bureau of Census for the Bureau of Labor Statistics. The survey obtains the data needed for this collection by asking questions about people’s employment, their earnings, and their demographics. The bureau conducts the Current Population Survey (CPS) because it allows them to understand what the employment situation is like in the United States; and thus, take or push for action from there. Without an overview and understanding of how the population of the country is doing, there would be no way to know if a need for more jobs or assistance is needed within the country. There are 558 unique occupations within the dataset. There are 7 unique features in the dataset, in the order of, “Occupation”, “All_workers”, “All_weekly”, “M_workers”, “M_weekly”, “F_workers”, “F_weekly.” Some ethical questions that can be considered when working with this data are, whether the CPS contains all demographics of a population equally, and if it is an online based survey how are people without access able to be represented. Some limitations behind this dataset could be that it only shows the data from 2015, it has only binary genders (M and F), and it does not show any other demographic factors.
+
+### Implications
+
+There are many implications that can arise for technologists, designers and policymakers. Starting with technologists, one possible implication is the economic capitalization of this research. Technologists can leverage potential low/high demand industries and innovate accordingly. This can be done by innovating products and services that attempt to solve a problem/gap within an industry. On the other hand, technologists can potentially take advantage of certain inefficiencies and imbalances such as the gender wage gap. Additionally technologists can innovate or use existing technologies to serve a targeted employee of an industry.
+
+There are also many other implications when it comes to designers. A designer in this case can arbitrarily be any designer ranging from corporate designers to product designers. Possible implications could be a push for better corporate design that can accommodate the targeted gender. This can be done through the better design of career advancement systems, salary compensation, raises criterias, and more. Similarly, product designers can design tools and environments that are more suited to all employees in an effort to even the playing field.
+
+Similarly for policymakers, implications can range from the push for more accommodating policies to the enforcement of existing policies. Actions can be targeted towards gender wage inequality, diversity, and representation within a workforce. Further implications on policymakers can be the pressure to promote a certain industry or practice with subsidies.
+
+### Limitations & Challenges
+
+A limitation is within the dataset; it doesn’t include data on non-binary groups of people. A challenge is determining how much of the data can be applied to answering the question of, “Is there a wage gap?”. There are some hidden factors that the data doesn’t show, such as, “How long have they been working, as they could have acquired bonuses?”, “How many hours do they work?”, “What are their level of expertises, as some people could get paid more due to being more knowledgeable?”, or “How far up are they in management, as people with higher roles tend to have a higher pay as well?” All these factors need to be considered for this data to show a more accurate representation of whether there is a wage gap. Another limitation is not knowing their race and ethnicity. It would be interesting to see how racism and intersectionality come into play.
+
+### Summary Information
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, code = readLines("summary.R")}
+```
+While analyzing our data from 2015, we found that in `r men_percentage`% of the occupations, men were paid more than women. That means there are only `r women_percentage`% of occupations where women are paid more than men. Comparing both men and women's weekly income, men had an average income of \$`r max_men_wage`, while women had an average of \$`r max_women_wage`; that is a \$`r diff_wage` difference in their average wages. We also looked at the occupations with the largest wage gaps. For the occupation where men were paid more than women, the occupation was `r high_occ_gap` with a \$`r high_wage_gap` difference. For the occupation where women were paid more than men, the occupation was `r top_wocc_gap` with a \$`r top_w_wage_gap` difference.
+
+### Table
+
+```{r, echo = FALSE, code = readLines("aggregate_summary.R")}
+```
+This table gives an overview of the categories of occupations. This allows us to analyze the differences in wage gaps and number of workers throughout different industries on a broader spectrum.
+
+### Chart 1
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, code = readLines("piechart.R")}
+```
+
+This is a visualization of the great disparity between men and women within the overall occupations. This shows that within `r men_percentage`% of the occupations, men were paid more than women. This tell a greater narrative about how patriarchal the occupation environment is.
+
+### Chart 2
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, code = readLines("histograms.R")}
+```
+
+The second chart is looking at the spread of average weekly salary and the number of occupations through a histogram. The reason why a histogram was chosen was because it looks at two numerical variables, enabling viewers to see the spread of the data. The graph reveals that it is right-skewed for both male and female groups. It also reveals that within both categories of gender, the average is within the 500-1000 range. The female histogram shows a staircase-like structure; on the other hand, the male's histogram lowers as the salary increases, but not at the same rate. In addition, the male's weekly salary hits close to 2500 range while the female's weekly salary does not come close. The usage of the histogram allows one to see the varying spread within each gender and how the spread of the data varies between male and female.
+
+### Chart 3
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, code = readLines("top10highestpay.R")}
+
+```
+
+The next chart chosen is a bar chart that shows the top 10 highest paying occupations between both male and females. A bar chart is used because we are looking at one category, which is occupation, and the weekly pay. These bar charts express the similarities and the differences in the top jobs for male and females. It also shows how despite comparing the same occupations, the jobs where women earn the most vary from the jobs where men earn the most.
+
+### Chart 4
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, code = readLines("bar_nameofjobspaidmore.R")}
+```
+
+The last chart was another bar chart that shows occupations where one gender is being paid more over the other. This was incorporated as it was important for viewers to see the jobs with the biggest wage gap, as well as how big the wage gaps are. The data has been split up into two different charts as one shows the jobs where women are paid more than men and vice versa. The male's had to be in the top 10, because of the large number of occupations where men were paid more. This data shows that women, in the occupation in which they receive the most, are only receiving \$`r top_w_wage_gap`more. On the other hand, in the occupations where men receive the most, they are receiving \$`r high_wage_gap` more than women.
+
