@@ -8,24 +8,53 @@ income_df <- read.csv("inc_occ_gender.csv", stringsAsFactors = FALSE)
 server <- function(input, output) {
   
   #tab1
-  weeklys <- income_df %>% 
-    select(Occupation, M_weekly, F_weekly)
-  
-  weekly_incomes <- weeklys %>% 
-    pivot_longer(!c(Occupation), 
-                 names_to = "category",
-                 values_to = "amount")
+  all_weekly_numeric <- as.numeric(income_df %>% pull(All_weekly))
+  m_weekly_numeric <- as.numeric(income_df %>% pull(M_weekly))
+  f_weekly_numeric <- as.numeric(income_df %>% pull(F_weekly))
 
+  income_df <- income_df %>% mutate(All_weekly = all_weekly_numeric,
+                                    M_weekly = m_weekly_numeric, F_weekly = f_weekly_numeric)
+  
   
   output$weekly_histogram <- renderPlot({
-    filter_data <- weekly_incomes %>%
-      filter(category %in% input$genderselect)
-    
-    weekly_historgram <- 
-      hist(amount,
+    if(input$genderselect == "M_weekly") {
+      weekly_men <- income_df %>% 
+        select(Occupation, M_weekly)
+     
+    weekly_histogram <- 
+      hist(weekly_men$M_weekly,
+           main = "Male Weekly Salary",
            xlab = "Average Weekly Salary",
            ylab = "Number of Occupations",
+           xlim = c(0, 2500),
+           col = "#73C6B6",
+           freq = TRUE)
+    }
+    else if(input$genderselect == "F_weekly") {
+      weekly_women <- income_df %>% 
+        select(Occupation, F_weekly)
+      
+      hist(weekly_women$F_weekly,
+           main = "Female Weekly Salary",
+           xlab = "Average Weekly Salary",
+           ylab = "Number of Occupations",
+           xlim = c(0, 2500),
+           col = "#A569BD",
+           freq = TRUE)
+    }
+    else{
+      weekly_both <-
+        income_df %>% 
+        select(Occupation, M_weekly, F_weekly)
+      
+      hist(weekly_both$M_weekly,
            col = "#73C6B6")
+      hist(weekly_both$F_weekly,
+           col = "#A569BD",
+           add = TRUE)
+      
+    }
+    
     
   return(weekly_histogram)
   })

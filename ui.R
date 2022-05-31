@@ -31,7 +31,8 @@ sidebar_panel_widget_tab1 <- sidebarPanel(
   checkboxGroupInput(
     inputId = "genderselect",
     label = h3("Selection"),
-    choices = c("M_weekly" = "Men", "F_weekly" = "Women")
+    choices = c("Men" = "M_weekly", "Women" = "F_weekly"),
+    selected = "M_weekly"
 ))
   
 
