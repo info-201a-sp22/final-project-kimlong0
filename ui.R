@@ -1,6 +1,7 @@
 library(plotly)
 library(bslib)
 library(markdown)
+source("summary.R")
 
 # Load climate data
 income_df <- read.csv("inc_occ_gender.csv", stringsAsFactors = FALSE)
@@ -70,6 +71,7 @@ tab2 <- tabPanel(
   sidebar_panel_widget_tab2,
   main_panel_plot_2
 )
+
 # page 3
 tab3 <- tabPanel(
   "Chart 3"
