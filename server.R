@@ -8,6 +8,28 @@ income_df <- read.csv("inc_occ_gender.csv", stringsAsFactors = FALSE)
 server <- function(input, output) {
   
   #tab1
+  weeklys <- income_df %>% 
+    select(Occupation, M_weekly, F_weekly)
+  
+  weekly_incomes <- weeklys %>% 
+    pivot_longer(!c(Occupation), 
+                 names_to = "category",
+                 values_to = "amount")
+
+  
+  output$weekly_histogram <- renderPlot({
+    filter_data <- weekly_incomes %>%
+      filter(category %in% input$genderselect)
+    
+    weekly_historgram <- 
+      hist(amount,
+           xlab = "Average Weekly Salary",
+           ylab = "Number of Occupations",
+           col = "#73C6B6")
+    
+  return(weekly_histogram)
+  })
+
   
   # tab2
   output$top_occupation_bar_chart <- renderPlot({
@@ -22,7 +44,7 @@ server <- function(input, output) {
         geom_col(mapping = aes(x = reorder(Occupation, M_weekly), 
                                y = M_weekly),
                  fill = "#73C6B6") +
-        labs(title = "Top Highest Paying Occupations \n for Men",
+        labs(title = "Top Highest Paying Occupations for Men",
              x = "Occupations", y = "Median Weekly Pay") + 
         theme(plot.title = element_text(face = "bold")) +
         coord_flip()
@@ -38,7 +60,7 @@ server <- function(input, output) {
         geom_col(mapping = aes(x = reorder(Occupation, F_weekly), 
                                y = F_weekly),
                  fill = "#A569BD") + 
-        labs(title = "Top Highest Paying Occupations \n for Women",
+        labs(title = "Top Highest Paying Occupations for Women",
              x = "Occupations", y = "Median Weekly Pay") +
         theme(plot.title = element_text(face = "bold")) +
         coord_flip()
@@ -55,7 +77,7 @@ server <- function(input, output) {
         geom_col(mapping = aes(x = reorder(Occupation, All_weekly), 
                                y = All_weekly),
                  fill = "blue") + 
-        labs(title = "Top Highest Paying Occupations \n for ALL",
+        labs(title = "Top Highest Paying Occupations for ALL",
              x = "Occupations", y = "Median Weekly Pay") +
         theme(plot.title = element_text(face = "bold")) +
         coord_flip()
@@ -64,6 +86,10 @@ server <- function(input, output) {
   })
   
   #tab 3
+  
+  
+  
+  
 
 # conclusion
   output$occupations <- renderTable({
@@ -77,5 +103,5 @@ server <- function(input, output) {
                  "SOCIAL SERVICE"))
   })
   return(occupations)
+
 }
-    

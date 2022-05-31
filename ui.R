@@ -29,20 +29,11 @@ intro_tab <- tabPanel(
 # Create sidebar panel for widget
 sidebar_panel_widget_tab1 <- sidebarPanel(
   checkboxGroupInput(
-    inputId = "selection",
-    label = "Selection",
-    choices = c("selection1", "selection2", "selection2"),
-    # True allows you to select multiple choices...
-    #multiple = TRUE,
-    selected = "selection1"
-  ),
+    inputId = "genderselect",
+    label = h3("Selection"),
+    choices = c("M_weekly" = "Men", "F_weekly" = "Women")
+))
   
-  sliderInput(inputId = "slider2",
-              label = h3("1-10"),
-              min = min(1), 
-              max = max(10),
-              value = c(1, 10))
-)
 
 sidebar_panel_widget_tab2 <- sidebarPanel(
   radioButtons("gender_selection", label = h3("Selection"),
@@ -55,6 +46,7 @@ sidebar_panel_widget_tab2 <- sidebarPanel(
 main_panel_plot <- mainPanel(
   # Make plot interactive
   #plotlyOutput(outputId = "climate_plot")
+  plotOutput(outputId = "weekly_histogram")
 )
 
 main_panel_plot_2 <- mainPanel(
@@ -99,7 +91,7 @@ ui <- navbarPage(
   # Select Theme
   theme = "cerulean",
   # Home page title
-  "Gender Wage Gap 2015",
+  "Gender Wage Gap in 2015",
   intro_tab,
   tab1,
   tab2,
