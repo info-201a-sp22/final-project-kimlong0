@@ -91,20 +91,12 @@ tab2 <- tabPanel(
 )
 
 # page 3
-<<<<<<< HEAD
-
-
-# tab3 <- tabPanel(
-#   "Chart 3"
-# )
-=======
 tab3 <- tabPanel(
   "woo", 
   fluidPage(
     main_panel_plot_tab3
   )
 )
->>>>>>> 157607eb6066b22b302d0991634884594583271d
 
 # Conclusion page
 conclusion_tab <- tabPanel(
