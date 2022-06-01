@@ -101,9 +101,9 @@ tab2 <- tabPanel(
 # page 3
 
 
-tab3 <- tabPanel(
-  "Chart 3"
-)
+# tab3 <- tabPanel(
+#   "Chart 3"
+# )
 
 # Conclusion page
 conclusion_tab <- tabPanel(

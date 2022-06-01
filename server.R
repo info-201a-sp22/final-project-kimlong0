@@ -134,8 +134,6 @@ server <- function(input, output) {
   
   
   
-  
-
 # conclusion
   output$occupations <- renderTable({
     occupations <- income_df %>%
