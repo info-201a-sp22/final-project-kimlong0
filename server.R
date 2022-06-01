@@ -61,7 +61,7 @@ server <- function(input, output) {
   })
 
   # tab2
-  output$top_occupation_bar_chart <- renderPlot({
+  output$top_occupation_bar_chart <- renderPlotly({
     
     #Function for creating plot
     create_top_occupation_plot <- function(column, type, color, order) {
@@ -81,10 +81,10 @@ server <- function(input, output) {
     create_occupation_plot_top <- function(df, column, type, color) {
       ggplot(data = df) + 
         geom_col(mapping = aes(x = reorder(Occupation, get(column)), 
-                               y = get(column)),
+                               y = get(column), text = paste0("Median Weekly Pay $", get(column))),
                  fill = color) + 
-        labs(title = paste("Top Highest Paying Occupations for", type),
-             x = "Occupations", y = "Median Weekly Pay") +
+        labs(title = paste("Highest Paying Occupations for", type),
+             x = "Occupations", y = "Median Weekly Pay (USD)") +
         theme(plot.title = element_text(face = "bold")) +
         coord_flip()
     }
@@ -92,11 +92,12 @@ server <- function(input, output) {
     #Function creating plot ascending order
     create_occupation_plot_bottom <- function(df, column, type, color) {
       ggplot(data = df) + 
-        geom_col(mapping = aes(x = reorder(Occupation, -(get(column))), 
-                               y = get(column)),
+        geom_col(mapping = aes(x = reorder(Occupation, -get(column)), 
+                               y = get(column),
+                               text = paste0("Median Weekly Pay $", get(column))),
                  fill = color) + 
-        labs(title = paste("Top Highest Paying Occupations for", type),
-             x = "Occupations", y = "Median Weekly Pay") +
+        labs(title = paste("Lowest Paying Occupations for", type),
+             x = "Occupations", y = "Median Weekly Pay (USD)") +
         theme(plot.title = element_text(face = "bold")) +
         coord_flip()
     }

@@ -35,18 +35,6 @@ sidebar_panel_widget_tab1 <- sidebarPanel(
     choices = c("Men" = "M_weekly", "Women" = "F_weekly"),
     selected = "M_weekly"
 ))
-  
-
-sidebar_panel_widget_tab2 <- sidebarPanel(
-  radioButtons("order", label = h3("Order Selection"),
-               choices = list("Highest Paid Occupation" = "+", "Least Paid Occupation" = "-"), 
-               selected = "+"),
-  radioButtons("gender_selection", label = h3("Group Selection"),
-               choices = list("Men" = 1, "Women" = 2, "All" = 3), 
-               selected = 1),
-  sliderInput("top_occupation_selection", label = h3("Number of Top Occupation"), min = 1, 
-              max = nrow(occupation_raw), value = 10)
-)
 
 main_panel_plot <- mainPanel(
   # Make plot interactive
@@ -54,9 +42,24 @@ main_panel_plot <- mainPanel(
   plotOutput(outputId = "weekly_histogram")
 )
 
-main_panel_plot_2 <- mainPanel(
-  # Make plot interactive
-  plotOutput(outputId = "top_occupation_bar_chart")
+widget_row_tab2 <- fluidRow(
+  column(4,
+         radioButtons("order",
+                      label = h3("Order Selection"),
+                         choices = list("Highest Paying Occupation" = "+",
+                                        "Lowest Paying Occupation" = "-"))),
+  column(4,
+         radioButtons("gender_selection", label = h3("Group Selection"),
+                           choices = list("Men" = 1, "Women" = 2, "All" = 3), 
+                           selected = 1)),
+  column(4,
+         sliderInput("top_occupation_selection",
+                     label = h3("Range of Occupation"), min = 1,
+                     max = nrow(occupation_raw), value = 10))
+)
+
+main_plot_tab2 <- fluidRow(
+  plotlyOutput(outputId = "top_occupation_bar_chart")
 )
 
 # page 1 
@@ -68,12 +71,13 @@ tab1 <- tabPanel(
   )
 )
 
-
 # page 2 
 tab2 <- tabPanel(
   "Top Occupations",
-  sidebar_panel_widget_tab2,
-  main_panel_plot_2
+  fluidPage(
+    widget_row_tab2,
+    main_plot_tab2
+  )
 )
 
 # page 3
@@ -91,7 +95,6 @@ conclusion_tab <- tabPanel(
     )
   )
 )
-
 
 ui <- navbarPage(
   # Select Theme
