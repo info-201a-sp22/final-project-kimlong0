@@ -34,7 +34,8 @@ server <- function(input, output) {
       weekly_women <- income_df %>% 
         select(Occupation, F_weekly)
       
-      hist(weekly_women$F_weekly,
+      weekly_histogram <- 
+        hist(weekly_women$F_weekly,
            main = "Female Weekly Salary",
            xlab = "Average Weekly Salary",
            ylab = "Number of Occupations",
@@ -42,17 +43,17 @@ server <- function(input, output) {
            col = "#A569BD",
            freq = TRUE)
     }
-    else{
+    else {
       weekly_both <-
         income_df %>% 
         select(Occupation, M_weekly, F_weekly)
       
-      hist(weekly_both$M_weekly,
+      weekly_histogram <- 
+        hist(weekly_both$M_weekly,
            col = "#73C6B6")
-      hist(weekly_both$F_weekly,
+        hist(weekly_both$F_weekly,
            col = "#A569BD",
            add = TRUE)
-      
     }
     
     

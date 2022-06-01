@@ -58,7 +58,7 @@ main_panel_plot_2 <- mainPanel(
 
 # page 1 
 tab1 <- tabPanel(
-  "Chart 1",
+  "Weekly Salary",
   sidebarLayout(
     sidebar_panel_widget_tab1,
     main_panel_plot
