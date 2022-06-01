@@ -7,15 +7,15 @@ source("summary.R")
 income_df <- read.csv("inc_occ_gender.csv", stringsAsFactors = FALSE)
 
 # Manually Determine a BootSwatch Theme
-# my_theme <- bs_theme(bg = "#0b3d91", #background color
-#                   fg = "white", #foreground color
-#                   primary = "#FCC780", # primary color
-# ) 
+ my_theme <- bs_theme(bg = "#0b3d91", #background color
+                   fg = "white", #foreground color
+                   primary = "#FCC780", # primary color
+ ) 
 
 # Update BootSwatch Theme
-# my_theme <- bs_theme_update(my_theme, bootswatch = "cerulean") %>% 
+ my_theme <- bs_theme_update(my_theme, bootswatch = "cerulean") %>% 
 #   # Add custom styling from a scss file
-#   bs_add_rules(sass::sass_file("my_style.scss"))
+   bs_add_rules(sass::sass_file("final_project.scss"))
 
 
 # introduction page
@@ -111,7 +111,7 @@ conclusion_tab <- tabPanel(
 
 ui <- navbarPage(
   # Select Theme
-  theme = "cerulean",
+  theme = my_theme,
   # Home page title
   "Gender Wage Gap in 2015",
   intro_tab,
