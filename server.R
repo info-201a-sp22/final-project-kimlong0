@@ -122,14 +122,14 @@ server <- function(input, output) {
   #tab 3
   
   output$top_pay_diff_tab3 <- renderPlot({
-    ggplot(data = top_pay_difference) +
+    top_pay_diff_plot <- ggplot(data = top_pay_difference) +
       geom_col(mapping = aes(x = reorder(Occupation, pay_difference),
                              y = pay_difference),
                fill = "#73C6B6") + 
       labs(title = "Top 10 Jobs Where Men Are Paid \nMore Than Women", x = "Occupations", y = "Weekly Pay") + 
       theme(plot.title = element_text(face = "bold")) +
       coord_flip()
-    return(top_pay_diff_tab3)
+    return(top_pay_diff_plot)
   })
   
   
