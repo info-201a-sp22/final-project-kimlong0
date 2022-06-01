@@ -68,16 +68,8 @@ main_plot_tab2 <- fluidRow(
   plotlyOutput(outputId = "top_occupation_bar_chart")
 )
 
-main_panel_plot_tab3 <- mainPanel(
-  fluidPage(
-    plotOutput(outputId = "top_pay_diff_tab3")
-  ))
-
-tab3 <- tabPanel(
-  "woo", 
-  sidebarLayout(
-    main_panel_plot_tab3
-  )
+main_panel_plot_tab3 <- fluidRow(
+  plotOutput(outputId = "top_pay_diff_tab3")
 )
 
 # page 1 
@@ -99,10 +91,11 @@ tab2 <- tabPanel(
 )
 
 # page 3
-
-
 tab3 <- tabPanel(
-  "Chart 3"
+  "woo", 
+  fluidPage(
+    main_panel_plot_tab3
+  )
 )
 
 # Conclusion page
