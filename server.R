@@ -116,7 +116,8 @@ server <- function(input, output) {
     else {
       top_occupation <- create_top_occupation_plot("All_weekly", "All", "red", order)
     }
-    return(top_occupation)
+    t <- ggplotly(top_occupation, tooltip = "text")
+    return(t)
   })
   
   #tab 3
@@ -126,9 +127,26 @@ server <- function(input, output) {
       geom_col(mapping = aes(x = reorder(Occupation, pay_difference),
                              y = pay_difference),
                fill = "#73C6B6") + 
-      labs(title = "Top 10 Jobs Where Men Are Paid \nMore Than Women", x = "Occupations", y = "Weekly Pay") + 
+      labs(title = "Top 10 Jobs Where Men Are Paid \nMore Than Women", x = "Occupations", y = "Difference in Weekly Pay") + 
       theme(plot.title = element_text(face = "bold")) +
       coord_flip()
+    return(top_pay_diff_plot)
+  })
+  
+  output$pay_difference <- renderPlotly({
+    
+    selected_difference_filtered <- occupation_difference %>% filter(Occupation %in% input$occupation_selection)
+    
+    top_pay_diff_plot <- ggplot(data = selected_difference_filtered) +
+      geom_col(mapping = aes(x = reorder(Occupation, pay_difference),
+                             y = pay_difference,
+                             text = paste0("Median Pay Difference: $", pay_difference)),
+               fill = "#73C6B6") + 
+      labs(title = "Jobs Where Men Are Paid More Than Women", x = "Occupations", y = "Difference in Weekly Pay") + 
+      theme(plot.title = element_text(face = "bold")) +
+      coord_flip()
+    
+    top_pay_diff_plot <- ggplotly(top_pay_diff_plot, tooltip = "text")
     return(top_pay_diff_plot)
   })
   

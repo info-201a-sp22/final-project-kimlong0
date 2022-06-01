@@ -84,6 +84,9 @@ df2 <- data %>%
          pos = value / 2 + lead(csum, 1),
          pos = if_else(is.na(pos), value / 2, pos))
 
+# Jobs Where Men Are Paid More Than Women
+occupation_difference <- occupation_raw %>%
+  mutate(pay_difference = M_weekly - F_weekly)
 
 # Top 10 Jobs Where Men Are Paid More Than Women
 top_pay_difference <- occupation_raw %>%

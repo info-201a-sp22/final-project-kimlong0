@@ -34,13 +34,17 @@ sidebar_panel_widget_tab1 <- sidebarPanel(
                choices = list("Men" = "M_weekly",
                               "Women" = "F_weekly",
                               "Both"))
-  )
-  # checkboxGroupInput(
-  #   inputId = "genderselect",
-  #   label = h3("Selection"),
-  #   choices = c("Men" = "M_weekly", "Women" = "F_weekly", "Both"),
-  #   selected = "M_weekly"
+)
 
+sidebar_panel_widget_tab3 <- sidebarPanel(
+  selectInput(
+    inputId = "occupation_selection",
+    label = "Select Occupation",
+    choices = occupation_difference$Occupation,
+    multiple = TRUE,
+    selected = "Lawyers"
+  )
+)
 
 main_panel_plot <- mainPanel(
   # Make plot interactive
@@ -61,7 +65,7 @@ widget_row_tab2 <- fluidRow(
   column(4,
          sliderInput("top_occupation_selection",
                      label = h3("Range of Occupation"), min = 1,
-                     max = nrow(occupation_raw), value = 10))
+                     max = 25, value = 10))
 )
 
 main_plot_tab2 <- fluidRow(
@@ -70,6 +74,10 @@ main_plot_tab2 <- fluidRow(
 
 main_panel_plot_tab3 <- fluidRow(
   plotOutput(outputId = "top_pay_diff_tab3")
+)
+
+main_panel_plot_tab3_1 <- mainPanel(
+  plotlyOutput(outputId = "pay_difference")
 )
 
 # page 1 
@@ -107,10 +115,13 @@ tab2 <- tabPanel(
 
 # page 3
 tab3 <- tabPanel(
-  "woo", 
+  "Pay Difference", 
   fluidPage(
     main_panel_plot_tab3
-  )
+  ),
+  sidebarLayout(
+    sidebar_panel_widget_tab3,
+    main_panel_plot_tab3_1)
 )
 
 # Conclusion page
