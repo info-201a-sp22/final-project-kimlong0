@@ -75,28 +75,34 @@ main_panel_plot_tab3 <- fluidRow(
 # page 1 
 tab1 <- tabPanel(
   "Weekly Salary",
+  h2("Weekly Analysis"),
+  p("In these set of graphs, one is able to examine the difference,
+      between men and women, and the spread of their weekly income."),
   sidebarLayout(
     sidebar_panel_widget_tab1,
     main_panel_plot
-  ),
-  p("In these set of graphs, one is able to examine the difference,
-      between men and women, and the spread of their weekly income.")
+    
+  )
+  
+  
 )
 
 # page 2 
 tab2 <- tabPanel(
   "Top Occupations",
-  fluidPage(
-    widget_row_tab2,
-    main_plot_tab2
-  ),
+  h2("Top Occupations"),
   p("The next chart chosen is a bar chart that shows the top 10 highest
     paying occupations between both male and females. A bar chart is used
     because we are looking at one category, which is occupation, and the
     weekly pay. These bar charts express the similarities and the differences
     in the top jobs for male and females. It also shows how despite comparing
     the same occupations, the jobs where women earn the most vary from the jobs
-    where men earn the most.")
+    where men earn the most."),
+   fluidPage(
+    widget_row_tab2,
+    main_plot_tab2
+  )
+ 
 )
 
 # page 3
