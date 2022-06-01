@@ -115,7 +115,11 @@ tab2 <- tabPanel(
 
 # page 3
 tab3 <- tabPanel(
-  "Pay Difference", 
+  "Pay Differnece",
+  h2("Pay Difference", style = "font-family: monospace; color: red;"), 
+  p("In this interactive map, one is able to explore the different jobs, and
+    compare the jobs they desire, and the pay difference between men and women
+    in each of those fields."),
   fluidPage(
     main_panel_plot_tab3
   ),
