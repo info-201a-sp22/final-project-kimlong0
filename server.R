@@ -63,12 +63,22 @@ server <- function(input, output) {
   # tab2
   output$top_occupation_bar_chart <- renderPlot({
     
-    #Function creating top plots
-    create_top_occupation_plot <- function(column, type, color) {
+    #Function for creating plot
+    create_top_occupation_plot <- function(column, type, color, order) {
       df <- occupation_raw %>%
         select(Occupation, column) %>%
-        top_n(input$top_occupation_selection, get(column))
+        top_n(as.numeric(paste0(order, input$top_occupation_selection), get(column)))
       
+      if (isTRUE(order == "+")) {
+        create_occupation_plot_top(df, column, type, color)
+      }
+      else {
+        create_occupation_plot_bottom(df, column, type, color)
+      }
+    }
+    
+    #Function creating plot descending order
+    create_occupation_plot_top <- function(df, column, type, color) {
       ggplot(data = df) + 
         geom_col(mapping = aes(x = reorder(Occupation, get(column)), 
                                y = get(column)),
@@ -79,14 +89,28 @@ server <- function(input, output) {
         coord_flip()
     }
     
+    #Function creating plot ascending order
+    create_occupation_plot_bottom <- function(df, column, type, color) {
+      ggplot(data = df) + 
+        geom_col(mapping = aes(x = reorder(Occupation, -(get(column))), 
+                               y = get(column)),
+                 fill = color) + 
+        labs(title = paste("Top Highest Paying Occupations for", type),
+             x = "Occupations", y = "Median Weekly Pay") +
+        theme(plot.title = element_text(face = "bold")) +
+        coord_flip()
+    }
+    
+    order <- input$order
+    
     if (input$gender_selection == 1) {
-      top_occupation <- create_top_occupation_plot("M_weekly", "Men", "#73C6B6")
+      top_occupation <- create_top_occupation_plot("M_weekly", "Men", "#73C6B6", order)
     }
     else if (input$gender_selection == 2){
-      top_occupation <- create_top_occupation_plot("F_weekly", "Women", "#A569BD")
+      top_occupation <- create_top_occupation_plot("F_weekly", "Women", "#A569BD", order)
     }
     else {
-      top_occupation <- create_top_occupation_plot("All_weekly", "All", "red")
+      top_occupation <- create_top_occupation_plot("All_weekly", "All", "red", order)
     }
     return(top_occupation)
   })

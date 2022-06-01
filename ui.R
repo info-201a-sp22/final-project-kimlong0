@@ -38,7 +38,10 @@ sidebar_panel_widget_tab1 <- sidebarPanel(
   
 
 sidebar_panel_widget_tab2 <- sidebarPanel(
-  radioButtons("gender_selection", label = h3("Selection"),
+  radioButtons("order", label = h3("Order Selection"),
+               choices = list("Highest Paid Occupation" = "+", "Least Paid Occupation" = "-"), 
+               selected = "+"),
+  radioButtons("gender_selection", label = h3("Group Selection"),
                choices = list("Men" = 1, "Women" = 2, "All" = 3), 
                selected = 1),
   sliderInput("top_occupation_selection", label = h3("Number of Top Occupation"), min = 1, 
