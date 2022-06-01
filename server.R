@@ -50,7 +50,10 @@ server <- function(input, output) {
       
       weekly_histogram <- 
         hist(weekly_both$M_weekly,
-           col = "#73C6B6")
+           col = "#73C6B6",
+           xlab = "Average Weekly Salary",
+           ylab = "Number of Occupations",
+           main = "Histogram for Both Men and Women")
         hist(weekly_both$F_weekly,
            col = "#A569BD",
            add = TRUE)
@@ -117,6 +120,17 @@ server <- function(input, output) {
   })
   
   #tab 3
+  
+  output$top_pay_diff_tab3 <- renderPlot({
+    ggplot(data = top_pay_difference) +
+      geom_col(mapping = aes(x = reorder(Occupation, pay_difference),
+                             y = pay_difference),
+               fill = "#73C6B6") + 
+      labs(title = "Top 10 Jobs Where Men Are Paid \nMore Than Women", x = "Occupations", y = "Weekly Pay") + 
+      theme(plot.title = element_text(face = "bold")) +
+      coord_flip()
+    return(top_pay_diff_tab3)
+  })
   
   
   
