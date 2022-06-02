@@ -114,25 +114,12 @@ server <- function(input, output) {
       top_occupation <- create_top_occupation_plot("F_weekly", "Women", "#A569BD", order)
     }
     else {
-      top_occupation <- create_top_occupation_plot("All_weekly", "All", "red", order)
+      top_occupation <- create_top_occupation_plot("All_weekly", "All", "#E87A4F", order)
     }
-    t <- ggplotly(top_occupation, tooltip = "text")
-    return(t)
+    interactive_plots <- ggplotly(top_occupation, tooltip = "text")
   })
   
   #tab 3
-  
-  output$top_pay_diff_tab3 <- renderPlot({
-    top_pay_diff_plot <- ggplot(data = top_pay_difference) +
-      geom_col(mapping = aes(x = reorder(Occupation, pay_difference),
-                             y = pay_difference),
-               fill = "#73C6B6") + 
-      labs(title = "Top 10 Jobs Where Men Are Paid \nMore Than Women", x = "Occupations", y = "Difference in Weekly Pay") + 
-      theme(plot.title = element_text(face = "bold")) +
-      coord_flip()
-    return(top_pay_diff_plot)
-  })
-  
   output$pay_difference <- renderPlotly({
     
     selected_difference_filtered <- occupation_difference %>% filter(Occupation %in% input$occupation_selection)
@@ -142,7 +129,9 @@ server <- function(input, output) {
                              y = pay_difference,
                              text = paste0("Median Pay Difference: $", pay_difference)),
                fill = "#73C6B6") + 
-      labs(title = "Jobs Where Men Are Paid More Than Women", x = "Occupations", y = "Difference in Weekly Pay") + 
+      labs(title = "Jobs Where Men Are\nPaid More Than Women",
+           x = "Occupations",
+           y = "Difference in Weekly Pay") + 
       theme(plot.title = element_text(face = "bold")) +
       coord_flip()
     
@@ -150,20 +139,26 @@ server <- function(input, output) {
     return(top_pay_diff_plot)
   })
   
+  output$top10male <- renderTable({
+    top10male <- top_pay_difference %>% select(Occupation, pay_difference)
+    top10male <- top10male %>% arrange(desc(pay_difference))
+    colnames(top10male) <- c("Occupation", "Median Pay Difference (Men - Female)")
+    return(top10male)
+  })
+
+  output$topfemale <- renderTable({
+    topfemale <- top_women_pay_difference %>% select(Occupation, pay_difference)
+    topfemale <- topfemale %>% arrange(pay_difference)
+    colnames(topfemale) <- c("Occupation", "Median Pay Difference (Women - Men)")
+    return(topfemale)
+  })
   
   
 # conclusion
   output$occupations <- renderTable({
-    occupations <- income_df %>%
-      filter(Occupation %in%
-               c("MANAGEMENT", "BUSINESS", "COMPUTATIONAL", "ENGINEERING",
-                 "SCIENCE", "LEGAL", "EDUCATION", "ART", "HEALTHCARE PROFESSIONAL",
-                 "HEALTHCARE SUPPORT", "PROTECTIVE SERVICE", "CULINARY",
-                 "GROUNDSKEEPING", "SERVICE", "SALES", "OFFICE", "AGRICULTURAL",
-                 "CONSTRUCTION", "MAINTENANCE", "PRODUCTION", "TRANSPORTATION",
-                 "SOCIAL SERVICE"))
+    occupations <- occupations %>% arrange(desc(All_workers))
+    
+    colnames(occupations) <- c('Industry', 'Total Workers', 'Median Weekly Income', 'Number of Male Workers', 'Male Median Weekly Income', 'Number of Female Workers', 'Female Median Weekly Income')
+    return(occupations)
   })
-  return(occupations)
-
-
 }

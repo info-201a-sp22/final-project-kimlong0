@@ -68,12 +68,23 @@ widget_row_tab2 <- fluidRow(
                      max = 25, value = 10))
 )
 
+table_title_row_tab3 <- fluidRow(
+  column(6, h4("Top 10 Occupations where Men are paid more than Women")),
+  column(6, h4("Only 5 Occupations where Women are paid more than Men")),
+)
+
+tablerow_tab3 <- fluidRow(
+  column(6, tableOutput(outputId = "top10male")),
+  column(6, tableOutput(outputId = "topfemale")),
+)
+
+
 main_plot_tab2 <- fluidRow(
   plotlyOutput(outputId = "top_occupation_bar_chart")
 )
 
-main_panel_plot_tab3 <- fluidRow(
-  plotOutput(outputId = "top_pay_diff_tab3")
+main_panel_plot_tab3 <- mainPanel(
+  tableOutput(outputId = "top10male")
 )
 
 main_panel_plot_tab3_1 <- mainPanel(
@@ -89,10 +100,7 @@ tab1 <- tabPanel(
   sidebarLayout(
     sidebar_panel_widget_tab1,
     main_panel_plot
-    
   )
-  
-  
 )
 
 # page 2 
@@ -110,32 +118,32 @@ tab2 <- tabPanel(
     widget_row_tab2,
     main_plot_tab2
   )
- 
 )
 
 # page 3
 tab3 <- tabPanel(
-  "Pay Differnece",
+  "Pay Difference",
   h2("Pay Difference", style = "font-family: monospace; color: red;"), 
   p("In this interactive map, one is able to explore the different jobs, and
     compare the jobs they desire, and the pay difference between men and women
     in each of those fields."),
-  fluidPage(
-    main_panel_plot_tab3
-  ),
   sidebarLayout(
     sidebar_panel_widget_tab3,
-    main_panel_plot_tab3_1)
+    main_panel_plot_tab3_1),
+  fluidPage(
+    table_title_row_tab3,
+    tablerow_tab3
+  )
 )
 
 # Conclusion page
 conclusion_tab <- tabPanel(
   "Conclusion",
   fluidPage(
-    includeMarkdown("conclusion.md"),
-    mainPanel(
-      tableOutput("occupations")
-    )
+    includeMarkdown("conclusion.md")
+    ),
+  fluidRow(
+    tableOutput("occupations")
   )
 )
 

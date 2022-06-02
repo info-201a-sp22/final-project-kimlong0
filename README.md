@@ -1,9 +1,16 @@
-# Title of Your Final Project Here 
+# The Analysis of the Relationship Between Occupation and Gender Pay
 ## INFO 201 "Foundational Skills for Data Science" — Spring 2022
 
-Authors: Your names here
+Authors:
 
-Link: Link to your Shiny App here
+### Authors
+
+Matthew Chung (mchung25@uw.edu)
+Trang Ha (htrang07@uw.edu)
+Christina Chen (clychen@uw.edu)
+Kimlong Nguyen (kimlong0@uw.edu)
+
+Link: https://htrang07.shinyapps.io/final-project-kimlong0/
 
 Please create the necessary files for your multi-page Shiny app in this GitHub repository. Consult the Canvas assignment for more details. Be sure to publish your app on Shinyapps.io.
 
