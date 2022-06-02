@@ -1,8 +1,6 @@
 # The Analysis of the Relationship Between Occupation and Gender Pay
 ## INFO 201 "Foundational Skills for Data Science" — Spring 2022
 
-Authors:
-
 ### Authors
 
 Matthew Chung (mchung25@uw.edu)
