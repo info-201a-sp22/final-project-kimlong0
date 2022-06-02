@@ -23,7 +23,7 @@ server <- function(input, output) {
      
     weekly_histogram <- 
       hist(weekly_men$M_weekly,
-           main = "Male Weekly Salary",
+           main = "Weekly Salary of Men",
            xlab = "Average Weekly Salary",
            ylab = "Number of Occupations",
            xlim = c(0, 2500),
@@ -36,7 +36,7 @@ server <- function(input, output) {
       
       weekly_histogram <- 
         hist(weekly_women$F_weekly,
-           main = "Female Weekly Salary",
+           main = "Weekly Salary of Women",
            xlab = "Average Weekly Salary",
            ylab = "Number of Occupations",
            xlim = c(0, 2500),
@@ -53,7 +53,7 @@ server <- function(input, output) {
            col = "#73C6B6",
            xlab = "Average Weekly Salary",
            ylab = "Number of Occupations",
-           main = "Histogram for Both Men and Women")
+           main = "Weekly Salaries of Both")
         hist(weekly_both$F_weekly,
            col = "#A569BD",
            add = TRUE)
@@ -84,7 +84,7 @@ server <- function(input, output) {
     create_occupation_plot_top <- function(df, column, type, color) {
       ggplot(data = df) + 
         geom_col(mapping = aes(x = reorder(Occupation, get(column)), 
-                               y = get(column), text = paste0("Median Weekly Pay $", get(column))),
+                               y = get(column), text = paste0("Median Weekly Pay: $", get(column))),
                  fill = color) + 
         labs(title = paste("Highest Paying Occupations for", type),
              x = "Occupations", y = "Median Weekly Pay (USD)") +
@@ -97,7 +97,7 @@ server <- function(input, output) {
       ggplot(data = df) + 
         geom_col(mapping = aes(x = reorder(Occupation, -get(column)), 
                                y = get(column),
-                               text = paste0("Median Weekly Pay $", get(column))),
+                               text = paste0("Median Weekly Pay: $", get(column))),
                  fill = color) + 
         labs(title = paste("Lowest Paying Occupations for", type),
              x = "Occupations", y = "Median Weekly Pay (USD)") +
@@ -114,7 +114,7 @@ server <- function(input, output) {
       top_occupation <- create_top_occupation_plot("F_weekly", "Women", "#A569BD", order)
     }
     else {
-      top_occupation <- create_top_occupation_plot("All_weekly", "All", "#E87A4F", order)
+      top_occupation <- create_top_occupation_plot("All_weekly", "All", "#efbb81", order)
     }
     interactive_plots <- ggplotly(top_occupation, tooltip = "text")
   })
@@ -129,7 +129,7 @@ server <- function(input, output) {
                              y = pay_difference,
                              text = paste0("Median Pay Difference: $", pay_difference)),
                fill = "#73C6B6") + 
-      labs(title = "Jobs Where Men Are\nPaid More Than Women",
+      labs(title = "Jobs Where Men Are Paid More Than Women",
            x = "Occupations",
            y = "Difference in Weekly Pay") + 
       theme(plot.title = element_text(face = "bold")) +
@@ -142,7 +142,7 @@ server <- function(input, output) {
   output$top10male <- renderTable({
     top10male <- top_pay_difference %>% select(Occupation, pay_difference)
     top10male <- top10male %>% arrange(desc(pay_difference))
-    colnames(top10male) <- c("Occupation", "Median Pay Difference (Men - Female)")
+    colnames(top10male) <- c("Occupation", "Median Pay Difference (Men - Women)")
     return(top10male)
   })
 

@@ -7,20 +7,22 @@ source("summary.R")
 income_df <- read.csv("inc_occ_gender.csv", stringsAsFactors = FALSE)
 
 # Manually Determine a BootSwatch Theme
- my_theme <- bs_theme(bg = "#0b3d91", #background color
-                   fg = "white", #foreground color
-                   primary = "#FCC780", # primary color
- ) 
+my_theme <- bs_theme(bg = "#8fcfdf", 
+                     fg = "#505B5A",
+                     primary = "#b5e3d5", 
+                     info = "#A569BD",
+                     base_font = font_google("Montserrat") 
+)
 
-# Update BootSwatch Theme
- my_theme <- bs_theme_update(my_theme, bootswatch = "lux") %>% 
-#   # Add custom styling from a scss file
-   bs_add_rules(sass::sass_file("final_project.scss"))
+my_theme <- bs_theme_update(my_theme, bootswatch = "litera")
+ 
+my_theme %>% bs_add_rules(sass::sass_file("final_project.scss"))
 
 
 # introduction page
 intro_tab <- tabPanel(
   "Introduction",
+  h1("Introduction", style = "color: #ed8674;"),
   fluidPage(
     includeMarkdown("intro.md")
   )
@@ -30,7 +32,7 @@ intro_tab <- tabPanel(
 # Create sidebar panel for widget
 sidebar_panel_widget_tab1 <- sidebarPanel(
   radioButtons("genderselect",
-               label = h3("Selection"),
+               label = h4("Group Selection"),
                choices = list("Men" = "M_weekly",
                               "Women" = "F_weekly",
                               "Both"))
@@ -39,7 +41,7 @@ sidebar_panel_widget_tab1 <- sidebarPanel(
 sidebar_panel_widget_tab3 <- sidebarPanel(
   selectInput(
     inputId = "occupation_selection",
-    label = "Select Occupation",
+    label = h4("Select Occupation"),
     choices = occupation_difference$Occupation,
     multiple = TRUE,
     selected = "Lawyers"
@@ -47,30 +49,28 @@ sidebar_panel_widget_tab3 <- sidebarPanel(
 )
 
 main_panel_plot <- mainPanel(
-  # Make plot interactive
-  #plotlyOutput(outputId = "climate_plot")
   plotOutput(outputId = "weekly_histogram")
 )
 
 widget_row_tab2 <- fluidRow(
   column(4,
          radioButtons("order",
-                      label = h3("Order Selection"),
+                      label = h4("Order Selection"),
                          choices = list("Highest Paying Occupation" = "+",
                                         "Lowest Paying Occupation" = "-"))),
   column(4,
-         radioButtons("gender_selection", label = h3("Group Selection"),
+         radioButtons("gender_selection", label = h4("Group Selection"),
                            choices = list("Men" = 1, "Women" = 2, "All" = 3), 
                            selected = 1)),
   column(4,
          sliderInput("top_occupation_selection",
-                     label = h3("Range of Occupation"), min = 1,
+                     label = h4("Range of Occupation"), min = 1,
                      max = 25, value = 10))
 )
 
 table_title_row_tab3 <- fluidRow(
-  column(6, h4("Top 10 Occupations where Men are paid more than Women")),
-  column(6, h4("Only 5 Occupations where Women are paid more than Men")),
+  column(6, h4("Top 10 Occupations Where Men Are Paid More Than Women")),
+  column(6, h4("Only 5 Occupations Where Women Are Paid More Than Men")),
 )
 
 tablerow_tab3 <- fluidRow(
@@ -94,7 +94,7 @@ main_panel_plot_tab3_1 <- mainPanel(
 # page 1 
 tab1 <- tabPanel(
   "Weekly Salary",
-  h2("Weekly Analysis", style = "font-family: roboto; color: purple;"),
+  h1("Weekly Salary", style = "color: #ed8674;"),
   p("In these set of graphs, one is able to examine the difference,
       between men and women, and the spread of their weekly income."),
   sidebarLayout(
@@ -106,7 +106,7 @@ tab1 <- tabPanel(
 # page 2 
 tab2 <- tabPanel(
   "Top Occupations",
-  h2("Top Occupations", style = "font-family: roboto; color: purple;"),
+  h1("Top Occupations", style = "color: #ed8674;"),
   p("The next chart chosen is a bar chart that shows the top 10 highest
     paying occupations between both male and females. A bar chart is used
     because we are looking at one category, which is occupation, and the
@@ -123,7 +123,7 @@ tab2 <- tabPanel(
 # page 3
 tab3 <- tabPanel(
   "Pay Difference",
-  h2("Pay Difference", style = "font-family: roboto; color: purple;"), 
+  h1("Pay Difference", style = "color: #ed8674;"), 
   p("In this interactive map, one is able to explore the different jobs, and
     compare the jobs they desire, and the pay difference between men and women
     in each of those fields."),
@@ -139,6 +139,7 @@ tab3 <- tabPanel(
 # Conclusion page
 conclusion_tab <- tabPanel(
   "Conclusion",
+  h1("Conclusion", style = "color: #ed8674;"),
   fluidPage(
     includeMarkdown("conclusion.md")
     ),
@@ -148,9 +149,7 @@ conclusion_tab <- tabPanel(
 )
 
 ui <- navbarPage(
-  # Select Theme
-  theme = "lux",
-  # Home page title
+  theme = my_theme,
   "Gender Wage Gap in 2015",
   intro_tab,
   tab1,
