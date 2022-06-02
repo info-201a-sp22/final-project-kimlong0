@@ -1,0 +1,14 @@
+name: final-project
+title: final-project
+username:
+account: matthewchung
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6416495
+bundleId: 5970303
+url: https://matthewchung.shinyapps.io/final-project/
+when: 1654143984.09107
+lastSyncTime: 1654143984.09108
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: aggregate_summary.R|bar_nameofjobspaidmore.R|chart1_example.R|inc_occ_gender.csv|index.html|index.Rmd|intro.md|numberofworkers.R|piechart.R|README.md|top10highestpay.R|top10paymen.R

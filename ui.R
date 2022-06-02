@@ -13,7 +13,7 @@ income_df <- read.csv("inc_occ_gender.csv", stringsAsFactors = FALSE)
  ) 
 
 # Update BootSwatch Theme
- my_theme <- bs_theme_update(my_theme, bootswatch = "cerulean") %>% 
+ my_theme <- bs_theme_update(my_theme, bootswatch = "lux") %>% 
 #   # Add custom styling from a scss file
    bs_add_rules(sass::sass_file("final_project.scss"))
 
@@ -94,7 +94,7 @@ main_panel_plot_tab3_1 <- mainPanel(
 # page 1 
 tab1 <- tabPanel(
   "Weekly Salary",
-  h2("Weekly Analysis"),
+  h2("Weekly Analysis", style = "font-family: roboto; color: purple;"),
   p("In these set of graphs, one is able to examine the difference,
       between men and women, and the spread of their weekly income."),
   sidebarLayout(
@@ -106,7 +106,7 @@ tab1 <- tabPanel(
 # page 2 
 tab2 <- tabPanel(
   "Top Occupations",
-  h2("Top Occupations"),
+  h2("Top Occupations", style = "font-family: roboto; color: purple;"),
   p("The next chart chosen is a bar chart that shows the top 10 highest
     paying occupations between both male and females. A bar chart is used
     because we are looking at one category, which is occupation, and the
@@ -123,7 +123,7 @@ tab2 <- tabPanel(
 # page 3
 tab3 <- tabPanel(
   "Pay Difference",
-  h2("Pay Difference", style = "font-family: monospace; color: red;"), 
+  h2("Pay Difference", style = "font-family: roboto; color: purple;"), 
   p("In this interactive map, one is able to explore the different jobs, and
     compare the jobs they desire, and the pay difference between men and women
     in each of those fields."),
@@ -149,7 +149,7 @@ conclusion_tab <- tabPanel(
 
 ui <- navbarPage(
   # Select Theme
-  theme = my_theme,
+  theme = "lux",
   # Home page title
   "Gender Wage Gap in 2015",
   intro_tab,
