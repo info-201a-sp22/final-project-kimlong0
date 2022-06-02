@@ -88,7 +88,7 @@ server <- function(input, output) {
                  fill = color) + 
         labs(title = paste("Highest Paying Occupations for", type),
              x = "Occupations", y = "Median Weekly Pay (USD)") +
-        theme(plot.title = element_text(face = "bold")) +
+        theme(plot.title = element_text(face = "bold", hjust = 0.5)) +
         coord_flip()
     }
     
@@ -101,7 +101,7 @@ server <- function(input, output) {
                  fill = color) + 
         labs(title = paste("Lowest Paying Occupations for", type),
              x = "Occupations", y = "Median Weekly Pay (USD)") +
-        theme(plot.title = element_text(face = "bold")) +
+        theme(plot.title = element_text(face = "bold", hjust = 0.5)) +
         coord_flip()
     }
     
@@ -129,10 +129,10 @@ server <- function(input, output) {
                              y = pay_difference,
                              text = paste0("Median Pay Difference: $", pay_difference)),
                fill = "#73C6B6") + 
-      labs(title = "Jobs Where Men Are Paid More Than Women",
+      labs(title = "Difference in Weekly Pay (Men - Women)",
            x = "Occupations",
            y = "Difference in Weekly Pay") + 
-      theme(plot.title = element_text(face = "bold")) +
+      theme(plot.title = element_text(face = "bold", hjust = 0.5)) +
       coord_flip()
     
     top_pay_diff_plot <- ggplotly(top_pay_diff_plot, tooltip = "text")

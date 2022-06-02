@@ -10,13 +10,11 @@ income_df <- read.csv("inc_occ_gender.csv", stringsAsFactors = FALSE)
 my_theme <- bs_theme(bg = "#8fcfdf", 
                      fg = "#505B5A",
                      primary = "#b5e3d5", 
-                     info = "#A569BD",
                      base_font = font_google("Montserrat") 
 )
 
-my_theme <- bs_theme_update(my_theme, bootswatch = "litera")
- 
-my_theme %>% bs_add_rules(sass::sass_file("final_project.scss"))
+my_theme <- bs_theme_update(my_theme, bootswatch = "litera") %>% 
+  bs_add_rules(sass::sass_file("final_project.scss"))
 
 
 # introduction page
