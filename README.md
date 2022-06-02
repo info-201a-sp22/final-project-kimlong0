@@ -11,7 +11,7 @@ Christina Chen (clychen@uw.edu)
 
 Kimlong Nguyen (kimlong0@uw.edu)
 
-Link: https://htrang07.shinyapps.io/final-project-kimlong0/
+Link: https://matthewchung.shinyapps.io/final-project/
 
 # Introduction
 
